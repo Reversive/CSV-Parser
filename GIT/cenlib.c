@@ -9,22 +9,22 @@ struct Inhabitant {
 
 struct Apartment {
     char * apName;
-    unsigned int aptQuantity;
-    char status[4];
+    unsigned long aptQuantity;
+    unsigned long status[4];
     struct Apartment * next;
 };
 
 struct Province {
     char * provName;
-    unsigned int prvQuantity;
-    char status[4];
+    unsigned long prvQuantity;
+    unsigned long status[4];
     struct Apartment * first;
     struct Province * next;
 };
 
 struct Country {
-    unsigned int ctyQuantity;
-    int status[4];
+    unsigned long ctyQuantity;
+    unsigned long status[4];
     struct Province * firstProv;
 };
 
@@ -146,8 +146,8 @@ static struct Apartment * addOrEditApt(struct Apartment * a, struct Inhabitant h
 void makeCountry(const countryADT c) {
     if(c == NULL) return;
     FILE * f = openFile("Pais.csv", "w", c);
-    int ocupados = charToInt(c->status[1]), desocupados = charToInt(c->status[2]);
-    fprintf(f, "%i,%.2f\n", c->ctyQuantity, CZERODIV(desocupados, ocupados+desocupados));
+    int ocupados = c->status[1], desocupados = c->status[2];
+    fprintf(f, "%lu,%.2f\n", c->ctyQuantity, CZERODIV(desocupados, ocupados+desocupados));
     fclose(f);
 }
 
@@ -157,8 +157,8 @@ void makeProvince(const countryADT c) {
     struct Province * iter = c->firstProv;
     FILE * f = openFile("Pronvicia.csv", "w", c);
     while(iter != NULL) {
-        int ocupados = charToInt(iter->status[1]), desocupados = charToInt(iter->status[2]);
-        fprintf(f, "%s,%i,%.2f\n", iter->provName, iter->prvQuantity, 
+        int ocupados = iter->status[1], desocupados = iter->status[2];
+        fprintf(f, "%s,%lu,%.2f\n", iter->provName, iter->prvQuantity, 
         CZERODIV(desocupados, ocupados+desocupados));
         iter = iter->next;
     }
@@ -173,8 +173,8 @@ void makeApartment(const countryADT c) {
     while(iter != NULL) {
         struct Apartment * it = iter->first;
         while(it != NULL) {
-            int ocupados = charToInt(it->status[1]), desocupados = charToInt(it->status[2]);
-            fprintf(f,"%s,%s,%i,%.2f\n", iter->provName, it->apName, it->aptQuantity, 
+            int ocupados = it->status[1], desocupados = it->status[2];
+            fprintf(f,"%s,%s,%lu,%.2f\n", iter->provName, it->apName, it->aptQuantity, 
             CZERODIV(desocupados, ocupados+desocupados));
             it = it->next;
         }
