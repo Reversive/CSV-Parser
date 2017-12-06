@@ -1,5 +1,5 @@
 # TPE 
-Matias Pavan y Franco Baliarda
+GRUPO: Matias Pavan y Franco Baliarda
 
 PARA COMPILAR EL PROGRAMA
 -Situese en el directorio que contiene los archivos fuentes.
