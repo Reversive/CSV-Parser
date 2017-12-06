@@ -10,15 +10,16 @@ int main(void) {
     countryADT c = newCountry();
 
     while((getline(line,MAXLINE)) != EOF) {
-    	sscanf(line,"%c,%lu,%[^,],%[^\n]", &condition, &homeID, apName, provName);
-        inhabitant = newInhabitant(condition, homeID, apName, provName, c);
-	    addInhabitant(c,inhabitant);
-	    freeInhabitant(inhabitant);
+    	if(sscanf(line,"%c,%lu,%[^,],%[^\n]", &condition, &homeID, apName, provName) == 4) {
+            inhabitant = newInhabitant(condition, homeID, apName, provName, c);
+	        addInhabitant(c,inhabitant);
+            freeInhabitant(inhabitant);
+        }
     }
 
     makeCountry(c);
-    makeProvince(c);
-    makeApartment(c);
+    makeFlag(c, "Provincia.csv");
+    makeFlag(c, "Departamento.csv");
     freeCountry(c);
     return 0;
 }

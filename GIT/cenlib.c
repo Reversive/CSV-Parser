@@ -152,31 +152,25 @@ void makeCountry(const countryADT c) {
 }
 
 
-void makeProvince(const countryADT c) {
+void makeFlag(const countryADT c, char * name) {
     if(c == NULL) return;
+    FILE * f = openFile(name, "w", c);
     struct Province * iter = c->firstProv;
-    FILE * f = openFile("Pronvicia.csv", "w", c);
+    int flag = 0;
+    if(strcmp("Departamento.csv", name) == 0) flag = 1;
     while(iter != NULL) {
-        int ocupados = iter->status[1], desocupados = iter->status[2];
-        fprintf(f, "%s,%lu,%.2f\n", iter->provName, iter->prvQuantity, 
-        CZERODIV(desocupados, ocupados+desocupados));
-        iter = iter->next;
-    }
-    fclose(f);
-}
-
-
-void makeApartment(const countryADT c) {
-    if(c == NULL) return;
-    struct Province * iter = c->firstProv;
-    FILE * f = openFile("Departamento.csv", "w", c);
-    while(iter != NULL) {
-        struct Apartment * it = iter->first;
-        while(it != NULL) {
-            int ocupados = it->status[1], desocupados = it->status[2];
-            fprintf(f,"%s,%s,%lu,%.2f\n", iter->provName, it->apName, it->aptQuantity, 
-            CZERODIV(desocupados, ocupados+desocupados));
-            it = it->next;
+        if(flag == 0) {
+            int ocupados = iter->status[1], desocupados = iter->status[2];
+            fprintf(f, "%s,%lu,%.2f\n", iter->provName, iter->prvQuantity,
+                        CZERODIV(desocupados, ocupados+desocupados));
+        } else {
+            struct Apartment * it = iter->first;
+            while(it != NULL) {
+                int ocupados = it->status[1], desocupados = it->status[2];
+                fprintf(f,"%s,%s,%lu,%.2f\n", iter->provName, it->apName, it->aptQuantity, 
+                                            CZERODIV(desocupados, ocupados+desocupados));
+                it = it->next;
+            }
         }
         iter = iter->next;
     }

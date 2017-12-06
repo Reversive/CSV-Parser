@@ -27,17 +27,12 @@ void addInhabitant(countryADT c, inhabitantADT h);
 */
 void makeCountry(const countryADT c);
 
-/* Escribe el archivo Provincia.csv en el directorio de ejecución del programa,
-** basado en los datos contenidos en la instancia de censo c recibida.
-**  Ejemplo de invocación: makeProvince(c);
+/* Dependiendo del flag, escribe el archivo Provincia.csv o Departamento.csv 
+** en el directorio de ejecución del programa, basado en los datos contenidos 
+** en la instancia de censo c recibida.
+**  Ejemplo de invocación: makeProvince(c, "Provincia.csv");
 */
-void makeProvince(const countryADT c);
-
-/* Escribe el archivo Departamento.csv en el directorio de ejecución del programa,
-** basado en los datos contenidos en la instancia de censo c recibida.
-**  Ejemplo de invocación: makeApartment(c);
-*/
-void makeApartment(const countryADT c);
+void makeFlag(const countryADT c, char * name);
 
 /* Recibe una instancia de censo c y libera toda la memoria que se reservó para la misma. La
 ** instancia, una vez liberada, no debe usarse como parámetro de ninguna de las funciones anteriores.
