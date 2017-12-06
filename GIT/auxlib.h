@@ -3,14 +3,13 @@
 
 #define charToInt(x) (x - '0')
 #define MAXLINE 80
-#define BLOCKQTY 4
+#define CZERODIV(X, Y) ((Y != 0) ? (((double)X)/(Y)) : 0.f)
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <ctype.h>
 #include <string.h>
 
-FILE * openFile(char * path, char * action);
 int getline(char line[], int max);
 
 #endif
