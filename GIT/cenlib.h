@@ -29,7 +29,9 @@ void makeCountry(const countryADT c);
 
 /* Dependiendo del flag, escribe el archivo Provincia.csv o Departamento.csv 
 ** en el directorio de ejecución del programa, basado en los datos contenidos 
-** en la instancia de censo c recibida.
+** en la instancia de censo c recibida. Se opto por hacer una sola funcion ya que
+** para la creacion tanto de Provincia.csv como Departamento.csv se tienen que recorrer
+** todas las provincias.
 **  Ejemplo de invocación: makeProvince(c, "Provincia.csv");
 */
 void makeFlag(const countryADT c, char * name);

@@ -104,7 +104,6 @@ countryADT newCountry(void) {
     return c;
 }
 
-
 static struct Province * addOrEditProv(struct Province * p, struct Inhabitant h, countryADT c) {
     if(p == NULL || (strcmp(h.provName, p->provName) < 0)) {
         struct Province * aux = reserveMemory(sizeof(*aux), c);
@@ -124,7 +123,6 @@ static struct Province * addOrEditProv(struct Province * p, struct Inhabitant h,
     return p;
 }
 
-
 static struct Apartment * addOrEditApt(struct Apartment * a, struct Inhabitant h, countryADT c) {
     if(a == NULL || (strcmp(h.apName, a->apName) < 0)) {
         struct Apartment * aux = reserveMemory(sizeof(*aux), c);
@@ -142,7 +140,6 @@ static struct Apartment * addOrEditApt(struct Apartment * a, struct Inhabitant h
     return a;
 }
 
-
 void makeCountry(const countryADT c) {
     if(c == NULL) return;
     FILE * f = openFile("Pais.csv", "w", c);
@@ -150,7 +147,6 @@ void makeCountry(const countryADT c) {
     fprintf(f, "%lu,%.2f\n", c->ctyQuantity, CZERODIV(desocupados, ocupados+desocupados));
     fclose(f);
 }
-
 
 void makeFlag(const countryADT c, char * name) {
     if(c == NULL) return;
