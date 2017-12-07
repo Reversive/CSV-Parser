@@ -11,6 +11,4 @@ PARA EJECUTAR EL PROGRAMA:
 	LINUX: "./censo < [ARCHIVO_DE_ENTRADA]"
   
 	WINDOWS: "censo < [ARCHIVO_DE_ENTRADA]"
--Recuerde que el programa solo escribirá a la consola en caso de producirse un error.
-
-gcc -std=c99 -Wall -pedantic -o censo cenlib.c auxlib.c main.c
+-Recuerde que el programa solo escribirÃ¡ a la consola en caso de producirse un error.
