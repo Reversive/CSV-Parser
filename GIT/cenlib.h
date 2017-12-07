@@ -1,14 +1,22 @@
 #ifndef CENLIB_H
 #define CENLIB_H
 
+#include <stdio.h>
+#include <stdlib.h>
+#include <ctype.h>
+#include <string.h>
+
+#define MAXLINE 80
+#define CZERODIV(X, Y) ((Y != 0) ? (((double)X)/(Y)) : 0.f)
+
 typedef struct Country * countryADT;
 typedef struct Inhabitant * inhabitantADT;
 
 /* Devuelve una instancia vacía de un censo que debe mantenerse en memoria en tanto se desee  
-** conservar los datos cargados. 
+** conservar los datos cargados, se pasa una funcion de ordenamiento como parametro. 
 **  Ejemplo de invocación: paisADT p = nuevoPais();
 */
-countryADT newCountry(void);
+countryADT newCountry(int (*f)(const void*, const void*));
 
 /* Devuelve una instancia inhabitantADT llena por los parametros dados.
 **  Ejemplo de invocacion: inhabitantADT h = newInhabitant(condition, homeID, apName, provName, c);

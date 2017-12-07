@@ -23,6 +23,7 @@ struct Province {
 };
 
 struct Country {
+    int (*f)(const void *, const void *);
     unsigned long ctyQuantity;
     unsigned long status[4];
     struct Province * firstProv;
@@ -99,21 +100,22 @@ void addInhabitant(countryADT c, inhabitantADT h) {
 }
 
 
-countryADT newCountry(void) {
+countryADT newCountry(int (*f)(const void *, const void *)) {
     countryADT c = reserveMemory(sizeof(*c), NULL);
+    c->f = f;
     return c;
 }
 
 static struct Province * addOrEditProv(struct Province * p, struct Inhabitant h, countryADT c) {
-    if(p == NULL || (strcmp(h.provName, p->provName) < 0)) {
+    if(p == NULL || (c->f(h.provName, p->provName) < 0)) {
         struct Province * aux = reserveMemory(sizeof(*aux), c);
-        aux->provName = malloc(strlen(h.provName)+1);
+        aux->provName = reserveMemory(strlen(h.provName)+1, c);
         strcpy(aux->provName, h.provName);
         aux->prvQuantity = aux->status[charToInt(h.condition)] = 1;
         aux->next = p;
         aux->first = addOrEditApt(aux->first, h, c);
         return aux;
-    } else if(strcmp(h.provName, p->provName) == 0) {
+    } else if(c->f(h.provName, p->provName) == 0) {
         p->prvQuantity++;
         p->status[charToInt(h.condition)]++;
         p->first = addOrEditApt(p->first, h, c);
@@ -124,14 +126,14 @@ static struct Province * addOrEditProv(struct Province * p, struct Inhabitant h,
 }
 
 static struct Apartment * addOrEditApt(struct Apartment * a, struct Inhabitant h, countryADT c) {
-    if(a == NULL || (strcmp(h.apName, a->apName) < 0)) {
+    if(a == NULL || (c->f(h.apName, a->apName) < 0)) {
         struct Apartment * aux = reserveMemory(sizeof(*aux), c);
-        aux->apName = malloc(strlen(h.apName) + 1);
+        aux->apName = reserveMemory(strlen(h.apName) + 1, c);
         strcpy(aux->apName, h.apName);
         aux->aptQuantity = aux->status[charToInt(h.condition)] = 1;
         aux->next = a;
         return aux;
-    } else if(strcmp(h.apName, a->apName) == 0) {
+    } else if(c->f(h.apName, a->apName) == 0) {
         a->aptQuantity++;
         a->status[charToInt(h.condition)]++;
         return a;
