@@ -5,7 +5,7 @@
 #include <stdlib.h>
 #include <ctype.h>
 #include <string.h>
-#define charToInt(x) (x-'0');
+#define charToInt(x) (x-'0')
 #define MAXLINE 80
 #define CZERODIV(X, Y) ((Y != 0) ? (((double)X)/(Y)) : 0.f)
 
