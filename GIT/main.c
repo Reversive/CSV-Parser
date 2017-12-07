@@ -1,5 +1,4 @@
 #include "cenlib.h"
-#include "auxlib.h"
 
 // Evitamos warning para la funcion generica.
 typedef int (*cmp_type)(const void *, const void *);

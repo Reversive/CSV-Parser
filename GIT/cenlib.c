@@ -1,5 +1,4 @@
 #include "cenlib.h"
-#include "auxlib.h"
 
 struct Inhabitant {
     unsigned char condition;
