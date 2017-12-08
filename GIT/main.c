@@ -19,9 +19,9 @@ int main(void) {
             }
         }   
     }
-    makeCountry(c);
-    makeFlag(c, "Provincia.csv");
-    makeFlag(c, "Departamento.csv");
+    makeCountryCSV(c);
+    makeFlagCSV(c, "Provincia.csv");
+    makeFlagCSV(c, "Departamento.csv");
     freeCountry(c);
     return 0;
 }
