@@ -141,7 +141,7 @@ static struct Apartment * addOrEditApt(struct Apartment * a, struct Inhabitant h
     return a;
 }
 
-void makeCountry(const countryADT c) {
+void makeCountryCSV(const countryADT c) {
     if(c == NULL) return;
     FILE * f = openFile("Pais.csv", "w", c);
     int ocupados = c->status[1], desocupados = c->status[2];
@@ -149,7 +149,7 @@ void makeCountry(const countryADT c) {
     fclose(f);
 }
 
-void makeFlag(const countryADT c, char * name) {
+void makeFlagCSV(const countryADT c, char * name) {
     if(c == NULL) return;
     FILE * f = openFile(name, "w", c);
     struct Province * iter = c->firstProv;
