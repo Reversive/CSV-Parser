@@ -8,23 +8,23 @@ struct Inhabitant {
 
 struct Apartment {
     char * apName;
-    unsigned long aptQuantity;
-    unsigned long status[4];
+    unsigned int aptQuantity;
+    unsigned int status[4];
     struct Apartment * next;
 };
 
 struct Province {
     char * provName;
-    unsigned long prvQuantity;
-    unsigned long status[4];
+    unsigned int prvQuantity;
+    unsigned int status[4];
     struct Apartment * first;
     struct Province * next;
 };
 
 struct Country {
     int (*f)(const void *, const void *);
-    unsigned long ctyQuantity;
-    unsigned long status[4];
+    unsigned int ctyQuantity;
+    unsigned int status[4];
     struct Province * firstProv;
 };
 
@@ -145,7 +145,7 @@ void makeCountryCSV(const countryADT c) {
     if(c == NULL) return;
     FILE * f = openFile("Pais.csv", "w", c);
     int ocupados = c->status[1], desocupados = c->status[2];
-    fprintf(f, "%lu,%.2f\n", c->ctyQuantity, CZERODIV(desocupados, ocupados+desocupados));
+    fprintf(f, "%u,%.2f\n", c->ctyQuantity, CZERODIV(desocupados, ocupados+desocupados));
     fclose(f);
 }
 
@@ -158,13 +158,13 @@ void makeFlagCSV(const countryADT c, char * name) {
     while(iter != NULL) {
         if(flag == 0) {
             int ocupados = iter->status[1], desocupados = iter->status[2];
-            fprintf(f, "%s,%lu,%.2f\n", iter->provName, iter->prvQuantity,
+            fprintf(f, "%s,%u,%.2f\n", iter->provName, iter->prvQuantity,
                         CZERODIV(desocupados, ocupados+desocupados));
         } else {
             struct Apartment * it = iter->first;
             while(it != NULL) {
                 int ocupados = it->status[1], desocupados = it->status[2];
-                fprintf(f,"%s,%s,%lu,%.2f\n", iter->provName, it->apName, it->aptQuantity, 
+                fprintf(f,"%s,%s,%u,%.2f\n", iter->provName, it->apName, it->aptQuantity, 
                                             CZERODIV(desocupados, ocupados+desocupados));
                 it = it->next;
             }
