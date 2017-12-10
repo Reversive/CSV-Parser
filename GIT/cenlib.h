@@ -14,7 +14,7 @@ typedef struct Inhabitant * inhabitantADT;
 
 /* Devuelve una instancia vacía de un censo que debe mantenerse en memoria en tanto se desee  
 ** conservar los datos cargados, se pasa una funcion de ordenamiento como parametro. 
-**  Ejemplo de invocación: paisADT p = nuevoPais();
+**  Ejemplo de invocación: countryADT p = newCountry((int(*)(const void *, const void *))cmpFunc);
 */
 countryADT newCountry(int (*f)(const void*, const void*));
 
