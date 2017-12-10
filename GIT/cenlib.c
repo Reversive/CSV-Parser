@@ -151,7 +151,7 @@ void makeCountryCSV(const countryADT c) {
 
 void makeFlagCSV(const countryADT c, char * name) {
     if(c == NULL) return;
-    if(!strcmp("Departamento.csv", name) || !strcmp("Provincia.csv", name)) return;
+    if(strcmp("Departamento.csv", name) || strcmp("Provincia.csv", name)) return;
     FILE * f = openFile(name, "w", c);
     struct Province * iter = c->firstProv;
     int flag = 0;
